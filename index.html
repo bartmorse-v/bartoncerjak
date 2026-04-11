@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Suite — Barton Cerjak Law</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #FE2920;
+  --dark:   #111111;
+  --near:   #242426;
+  --white:  #ffffff;
+  --paper:  #F5F5F5;
+  --body:   #333333;
+  --muted:  #777777;
+  --line:   #e0e0e0;
+  --max:    720px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body {
+  background: #dcdcda;
+  font-family: 'Barlow', sans-serif;
+  color: var(--body);
+  line-height: 1.6;
+}
+
+/* ── DOCUMENT ──────────────────────────────── */
+.doc {
+  max-width: var(--max);
+  margin: 48px auto;
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+}
+
+/* ── COVER ─────────────────────────────────── */
+.cover {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cover-bg {
+  position: absolute; inset: 0;
+  background-image: url('nanobanana-output/cinematic_dark_editorial_photo_o.png');
+  background-size: cover;
+  background-position: center 25%;
+}
+.cover-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(17,17,17,0.97) 0%,
+    rgba(17,17,17,0.8) 55%,
+    rgba(17,17,17,0.3) 100%);
+}
+.cover-content {
+  position: relative; z-index: 2;
+  padding: 40px 52px;
+}
+.cover-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 12px;
+}
+.cover h1 {
+  font-size: 38px; font-weight: 900;
+  color: var(--white); line-height: 1.1;
+  margin-bottom: 18px;
+}
+.cover h1 span { color: var(--red); }
+.cover-meta {
+  display: flex; gap: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 16px;
+}
+.cm-label { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.cm-value { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+/* ── BODY ──────────────────────────────────── */
+.body { padding: 0 52px; }
+
+/* ── SECTION ───────────────────────────────── */
+.sec {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sec:last-child { border-bottom: none; }
+
+.sec-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.sec h2 {
+  font-size: 22px; font-weight: 700;
+  color: var(--dark); margin-bottom: 14px;
+  line-height: 1.2;
+}
+.sec p {
+  font-size: 14px; color: var(--body);
+  line-height: 1.75; margin-bottom: 14px;
+}
+.sec p:last-child { margin-bottom: 0; }
+
+/* ── AGENTS GRID ───────────────────────────── */
+.agents {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+.agent {
+  background: var(--paper);
+  border-left: 3px solid var(--red);
+  padding: 18px 20px;
+}
+.agent h4 {
+  font-size: 13px; font-weight: 700;
+  color: var(--dark); margin-bottom: 5px;
+}
+.agent p { font-size: 12.5px; color: var(--muted); line-height: 1.55; margin: 0; }
+
+/* ── HOW IT WORKS ──────────────────────────── */
+.steps {
+  display: flex; flex-direction: column;
+  gap: 0; margin-top: 4px;
+  counter-reset: steps;
+}
+.step {
+  display: flex; gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: flex-start;
+  counter-increment: steps;
+}
+.step:last-child { border-bottom: none; }
+.step::before {
+  content: counter(steps);
+  font-size: 20px; font-weight: 900;
+  color: var(--red); min-width: 24px;
+  line-height: 1; flex-shrink: 0;
+  padding-top: 1px;
+}
+.step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.step p  { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+/* ── INVESTMENT ────────────────────────────── */
+.invest {
+  border: 1px solid var(--line);
+  margin-top: 4px;
+}
+.inv-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.inv-row:last-child { border-bottom: none; background: var(--dark); }
+.inv-label { font-size: 14px; font-weight: 600; color: var(--dark); }
+.inv-label small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.inv-row:last-child .inv-label { color: var(--white); }
+.inv-row:last-child .inv-label small { color: rgba(255,255,255,0.4); }
+.inv-price {
+  font-size: 22px; font-weight: 700;
+  color: var(--dark); white-space: nowrap;
+  text-align: right;
+}
+.inv-row:last-child .inv-price { color: var(--red); }
+
+/* ── NOTE BOX ──────────────────────────────── */
+.note {
+  background: var(--near);
+  border-left: 4px solid var(--red);
+  padding: 18px 22px;
+  margin-top: 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.note svg { stroke: var(--red); flex-shrink: 0; margin-top: 2px; }
+.note p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; }
+.note strong { color: #ff7070; }
+
+/* ── TERMS LIST ────────────────────────────── */
+.terms { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.term {
+  display: flex; gap: 12px;
+  font-size: 13.5px; color: var(--body);
+  line-height: 1.55;
+}
+.term svg { stroke: var(--red); flex-shrink: 0; margin-top: 3px; }
+
+/* ── SIGNATURE ─────────────────────────────── */
+.sig-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 20px;
+}
+.sig-box { border: 1px solid var(--line); padding: 22px; }
+.sig-box h4 {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 36px;
+}
+.sig-line { border-top: 1px solid var(--dark); margin-bottom: 5px; }
+.sig-name { font-size: 12px; color: var(--muted); }
+.sig-date { margin-top: 20px; }
+
+/* ── FOOTER ────────────────────────────────── */
+.doc-foot {
+  padding: 16px 52px;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+}
+.doc-foot p { font-size: 11px; color: var(--muted); }
+
+@media print {
+  body { background: white; }
+  .doc { box-shadow: none; margin: 0; max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bg" role="img" aria-label="Milwaukee law office at night"></div>
+    <div class="cover-overlay"></div>
+    <div class="cover-content">
+      <div class="cover-label">Statement of Work</div>
+      <h1>AI Agent Suite<br><span>for Barton Cerjak Law</span></h1>
+      <div class="cover-meta">
+        <div><div class="cm-label">Prepared for</div><div class="cm-value">Barton Cerjak Law</div></div>
+        <div><div class="cm-label">Prepared by</div><div class="cm-value">Bart Morse</div></div>
+        <div><div class="cm-label">Date</div><div class="cm-value">April 2026</div></div>
+        <div><div class="cm-label">Status</div><div class="cm-value">Confidential</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- 1. WHAT WE'RE BUILDING -->
+    <div class="sec">
+      <div class="sec-label">Section 1</div>
+      <h2>What We're Building</h2>
+      <p>We will design, configure, and install a suite of AI agents built on Claude — purpose-built for Barton Cerjak Law's practice areas, brand voice, and Milwaukee market. These are not off-the-shelf tools. Each agent is trained on the firm's specific context and built to be used directly by your team, on demand, without outside assistance.</p>
+      <p>Once installed, the agents belong to you. Your staff uses them. We maintain and improve them.</p>
+    </div>
+
+    <!-- 2. THE AGENT SUITE -->
+    <div class="sec">
+      <div class="sec-label">Section 2</div>
+      <h2>The Agent Suite</h2>
+      <p>The initial installation includes the following agents. Each is a standalone tool your team can run in minutes to produce ready-to-use output.</p>
+      <div class="agents">
+        <div class="agent">
+          <h4>Social Content Agent</h4>
+          <p>Drafts LinkedIn, Instagram, and Facebook posts in the firm's voice. Input a topic or case result — get a ready-to-post caption.</p>
+        </div>
+        <div class="agent">
+          <h4>Blog &amp; SEO Agent</h4>
+          <p>Produces long-form blog posts targeting Milwaukee search keywords. Input a topic — get a structured, SEO-ready draft.</p>
+        </div>
+        <div class="agent">
+          <h4>News Intelligence Agent</h4>
+          <p>Monitors Milwaukee-area news, Wisconsin court records, and legal industry updates. Surfaces relevant opportunities and drafts a response.</p>
+        </div>
+        <div class="agent">
+          <h4>Email &amp; Newsletter Agent</h4>
+          <p>Drafts client newsletters, referral partner updates, and intake follow-up emails. Consistent tone, ready to send.</p>
+        </div>
+        <div class="agent">
+          <h4>Case Manager Agent</h4>
+          <p>Assists with case intake summaries, status updates, deadline tracking notes, and internal case memos — keeping the team aligned without manual write-ups.</p>
+        </div>
+        <div class="agent">
+          <h4>Upgraded Brand Manager Agent <span style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--red); margin-left:6px;">Enhanced</span></h4>
+          <p>Already installed. This update expands the existing AI task manager with enhanced capabilities, such as recommendations and the ability to execute tasks.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. HOW IT WORKS -->
+    <div class="sec">
+      <div class="sec-label">Section 3</div>
+      <h2>How Your Team Uses It</h2>
+      <p>No technical knowledge required. Each agent works like a conversation — your staff types a prompt, the agent produces output, they review and use it. The entire process for most tasks takes under five minutes.</p>
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h4>Open the agent workspace</h4>
+            <p>Your team accesses the installed agents through a simple browser-based interface. No software to install, no logins to manage.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>Describe what you need</h4>
+            <p>Type a plain-English prompt: "Write a LinkedIn post about our recent verdict in a slip-and-fall case." The agent handles the rest.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>Review and use the output</h4>
+            <p>The agent delivers a finished draft. Your team edits if needed and publishes, sends, or files it. No back-and-forth with an outside vendor.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>We keep it current</h4>
+            <p>As Claude improves and your firm's needs evolve, we update the agents monthly — new capabilities, refined prompts, new agent builds on request.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. INVESTMENT -->
+    <div class="sec">
+      <div class="sec-label">Section 4</div>
+      <h2>Investment</h2>
+      <div class="invest">
+        <div class="inv-row">
+          <div class="inv-label">
+            Setup &amp; Installation
+            <small>Agent design, configuration, brand voice training, and a 90-minute onboarding session for your team</small>
+          </div>
+          <div class="inv-price">$4,500</div>
+        </div>
+        <div class="inv-row">
+          <div class="inv-label">
+            Monthly Retainer
+            <small>Ongoing maintenance, model upgrades, agent refinements, and priority support — all agents included</small>
+          </div>
+          <div class="inv-price">$1,850 / mo</div>
+        </div>
+        <div class="inv-row">
+          <div class="inv-label">
+            First-Year Total
+            <small>Setup fee plus 12 months of retainer</small>
+          </div>
+          <div class="inv-price">$26,700</div>
+        </div>
+      </div>
+      <div class="note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>The retainer does not cover content production. <strong>Your team creates the content — the agents make it fast.</strong> This is a software investment, not an agency relationship.</p>
+      </div>
+    </div>
+
+    <!-- 5. TERMS -->
+    <div class="sec">
+      <div class="sec-label">Section 5</div>
+      <h2>Terms</h2>
+      <div class="terms">
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Setup fee</strong> is due upon signing. Work begins within 5 business days.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Contract term:</strong> 3-month initial commitment, then month-to-month with 30 days written notice to cancel.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Billing:</strong> Monthly retainer invoiced on the 1st of each month, net 15.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Claude licensing:</strong> The firm will require a Claude Team or Claude for Work account (billed separately by Anthropic). We will advise on the right plan during onboarding.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Confidentiality:</strong> All firm data, case information, and strategic materials shared during setup are held in strict confidence.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. ACCEPTANCE -->
+    <div class="sec">
+      <div class="sec-label">Section 6</div>
+      <h2>Acceptance</h2>
+      <p>By signing below, both parties agree to the scope and terms outlined in this statement of work.</p>
+      <div class="sig-grid">
+        <div class="sig-box">
+          <h4>Barton Cerjak Law</h4>
+          <div class="sig-line"></div>
+          <div class="sig-name">Authorized Signature</div>
+          <div class="sig-date">
+            <div class="sig-line"></div>
+            <div class="sig-name">Date</div>
+          </div>
+        </div>
+        <div class="sig-box">
+          <h4>Service Provider</h4>
+          <div class="sig-line"></div>
+          <div class="sig-name">Bart Morse</div>
+          <div class="sig-date">
+            <div class="sig-line"></div>
+            <div class="sig-name">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="doc-foot">
+    <p>Confidential &nbsp;·&nbsp; Barton Cerjak Law &nbsp;·&nbsp; Milwaukee, Wisconsin &nbsp;·&nbsp; April 2026</p>
+    <p>Prepared by Bart Morse</p>
+  </div>
+
+</div>
+</body>
+</html>
