@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth OS — Barton Cerjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #FE2920;
+  --dark:   #111111;
+  --near:   #242426;
+  --white:  #ffffff;
+  --paper:  #F5F5F5;
+  --body:   #333333;
+  --muted:  #777777;
+  --line:   #e0e0e0;
+  --max:    900px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body {
+  background: #dcdcda;
+  font-family: 'Barlow', sans-serif;
+  color: var(--body);
+  line-height: 1.6;
+}
+
+.doc {
+  max-width: var(--max);
+  margin: 48px auto;
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+}
+
+/* ── COVER ─────────────────────────────────── */
+.cover {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cover-bg { position: absolute; inset: 0; background: var(--dark); }
+.cover-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%); }
+.cover-content { position: relative; z-index: 2; padding: 40px 52px; }
+.cover-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 12px;
+}
+.cover h1 {
+  font-size: 38px; font-weight: 900;
+  color: var(--white); line-height: 1.1;
+  margin-bottom: 18px;
+}
+.cover h1 span { color: var(--red); }
+.cover-meta { display: flex; gap: 28px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 16px; }
+.cm-label { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.cm-value { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+/* ── BODY ──────────────────────────────────── */
+.body { padding: 0 52px; }
+
+.sec { padding: 40px 0; border-bottom: 1px solid var(--line); }
+.sec:last-child { border-bottom: none; }
+
+.sec-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.sec h2 { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 14px; line-height: 1.2; }
+.sec p { font-size: 14px; color: var(--body); line-height: 1.75; margin-bottom: 14px; }
+.sec p:last-child { margin-bottom: 0; }
+
+/* ── STRATEGY BLOCKS ───────────────────────── */
+.strategies { display: flex; flex-direction: column; gap: 0; margin-top: 4px; }
+.strategy {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.strategy:last-child { border-bottom: none; }
+.strategy-num {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--red);
+  padding-top: 3px;
+}
+.strategy h4 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 6px; line-height: 1.2; }
+.strategy-sub { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.strategy p { font-size: 13.5px; color: var(--body); line-height: 1.7; margin: 0; }
+
+/* ── GROWTH OS BANNER ──────────────────────── */
+.os-banner {
+  background: var(--dark);
+  padding: 28px 30px;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+.os-banner-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.os-banner h3 {
+  font-size: 20px; font-weight: 900;
+  color: var(--white); margin-bottom: 10px;
+  line-height: 1.2;
+}
+.os-banner p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 0; }
+
+/* ── AGENT CARDS ───────────────────────────── */
+.agents { display: flex; flex-direction: column; gap: 16px; }
+.agent-card {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+}
+.agent-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.agent-head h4 { font-size: 15px; font-weight: 700; color: var(--dark); }
+.agent-serves {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--red);
+}
+.agent-tasks {
+  padding: 14px 20px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.agent-task {
+  display: flex; gap: 10px;
+  font-size: 13px; color: var(--body); line-height: 1.5;
+}
+.agent-task::before {
+  content: "—";
+  color: var(--red);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── JOINT ACCOUNTABILITIES ────────────────── */
+.party { margin-top: 20px; }
+.party:first-child { margin-top: 4px; }
+.party-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px;
+}
+.bullet-list { display: flex; flex-direction: column; gap: 9px; }
+.bullet-item {
+  display: flex; gap: 12px;
+  font-size: 13.5px; color: var(--body); line-height: 1.55;
+}
+.bullet-item::before {
+  content: "•"; color: var(--red);
+  font-weight: 900; flex-shrink: 0;
+  font-size: 16px; line-height: 1.3;
+}
+
+/* ── INVESTMENT ────────────────────────────── */
+.invest { border: 1px solid var(--line); margin-top: 4px; }
+.inv-row {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.inv-row:last-child { border-bottom: none; background: var(--dark); }
+.inv-label { font-size: 14px; font-weight: 600; color: var(--dark); }
+.inv-label small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.inv-row:last-child .inv-label { color: var(--white); }
+.inv-row:last-child .inv-label small { color: rgba(255,255,255,0.4); }
+.inv-price { font-size: 22px; font-weight: 700; color: var(--dark); white-space: nowrap; text-align: right; }
+.inv-row:last-child .inv-price { color: var(--red); }
+
+/* ── TERMS ─────────────────────────────────── */
+.terms { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.term { display: flex; gap: 12px; font-size: 13.5px; color: var(--body); line-height: 1.55; }
+.term svg { stroke: var(--red); flex-shrink: 0; margin-top: 3px; }
+.asterisk-note { font-size: 12px; color: var(--muted); margin-top: 14px; line-height: 1.55; }
+
+/* ── SIGNATURE ─────────────────────────────── */
+.sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+.sig-box { border: 1px solid var(--line); padding: 22px; }
+.sig-box h4 { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 36px; }
+.sig-line { border-top: 1px solid var(--dark); margin-bottom: 5px; }
+.sig-name { font-size: 12px; color: var(--muted); }
+.sig-date { margin-top: 20px; }
+
+/* ── FOOTER ────────────────────────────────── */
+.doc-foot {
+  padding: 16px 52px; background: var(--paper);
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+}
+.doc-foot p { font-size: 11px; color: var(--muted); }
+
+@media print {
+  body { background: white; }
+  .doc { box-shadow: none; margin: 0; max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bg"></div>
+    <div class="cover-overlay"></div>
+    <div class="cover-content">
+      <div class="cover-label">Consulting Services Agreement &nbsp;·&nbsp; Prepared for Barton Cerjak</div>
+      <h1>The Growth <span>OS</span></h1>
+      <div class="cover-meta">
+        <div><div class="cm-label">Prepared for</div><div class="cm-value">Barton Cerjak Law</div></div>
+        <div><div class="cm-label">Prepared by</div><div class="cm-value">Bart Morse</div></div>
+        <div><div class="cm-label">Date</div><div class="cm-value">April 2026</div></div>
+        <div><div class="cm-label">Status</div><div class="cm-value">Confidential</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- SUMMARY -->
+    <div class="sec">
+      <div class="sec-label">Summary</div>
+      <h2>A Marketing Engine Built for a Litigation Firm</h2>
+      <p>Barton Cerjak Law operates across three distinct practice areas — personal injury, commercial litigation, and class action — each with a different buyer, a different decision process, and a different marketing playbook. Most firms treat these as one, which means none of them get the focused, consistent effort they need to compound over time.</p>
+      <p>This engagement builds the Growth OS: a single AI-powered marketing system that coordinates four specialized sub-agents, each built for one part of the firm's pipeline. The system runs continuously — generating content, maintaining relationships, monitoring case law, and qualifying leads — surfacing only the decisions that require an attorney's judgment. The result is a firm that grows its visibility, its referral network, and its caseload without adding headcount to make it happen.</p>
+    </div>
+
+    <!-- STRATEGY -->
+    <div class="sec">
+      <div class="sec-label">Strategy</div>
+      <h2>Four Plays. Three Practice Areas.</h2>
+
+      <div class="strategies">
+        <div class="strategy">
+          <div class="strategy-num">01</div>
+          <div>
+            <div class="strategy-sub">Personal Injury</div>
+            <h4>Own Local Search</h4>
+            <p>PI clients search when they're in crisis — often from a hospital parking lot. The firm that appears first and responds fastest wins. The strategy: dominate local search through a library of hyper-local, intent-rich pages, a meticulously maintained Google Business Profile, and FAQ content structured for AI search and voice queries.</p>
+          </div>
+        </div>
+        <div class="strategy">
+          <div class="strategy-num">02</div>
+          <div>
+            <div class="strategy-sub">Commercial Litigation</div>
+            <h4>Systematize Referral Relationships</h4>
+            <p>Commercial litigation cases come from accountants, bankers, in-house counsel, and other attorneys. These relationships exist — they just aren't being worked systematically. The strategy: map every referral source into a CRM, maintain regular touchpoints with a monthly intelligence brief, and track relationship health so no warm contact goes cold.</p>
+          </div>
+        </div>
+        <div class="strategy">
+          <div class="strategy-num">03</div>
+          <div>
+            <div class="strategy-sub">Class Action</div>
+            <h4>Build Thought Leadership</h4>
+            <p>Class action co-counsel and named plaintiffs vet firms extensively. One substantive article on a novel class certification theory is worth more than fifty generic posts. The strategy: monitor case law continuously, publish original analysis, and place attorneys on the right podcasts and panels — where serious plaintiff-side practitioners are paying attention.</p>
+          </div>
+        </div>
+        <div class="strategy">
+          <div class="strategy-num">04</div>
+          <div>
+            <div class="strategy-sub">All Three Practice Areas</div>
+            <h4>Convert Leads at the Speed of Trust</h4>
+            <p>The single biggest revenue leak in PI firms is intake latency. A prospect in pain calls three firms — the first to respond with genuine, competent engagement wins. The strategy: a 24/7 intake agent that qualifies leads, captures facts, sets appointments, and follows up on unresponsive contacts through a personalized sequence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE SYSTEM -->
+    <div class="sec">
+      <div class="sec-label">The System</div>
+      <h2>One OS. Four Agents.</h2>
+
+      <div class="os-banner">
+        <div class="os-banner-label">Orchestrating Layer</div>
+        <h3>The Growth OS</h3>
+        <p>Rather than deploying disconnected tools, the Growth OS is a single super agent that coordinates all four sub-agents. It sets weekly priorities, routes work, monitors performance across practice areas, and surfaces only the decisions that require an attorney's judgment.</p>
+      </div>
+
+      <div class="agents">
+
+        <div class="agent-card">
+          <div class="agent-head">
+            <h4>Search &amp; Content Agent</h4>
+            <div class="agent-serves">Personal Injury</div>
+          </div>
+          <div class="agent-tasks">
+            <div class="agent-task">Generates hyper-local PI landing pages weekly</div>
+            <div class="agent-task">Monitors Google Business Profile and posts updates</div>
+            <div class="agent-task">Tracks keyword rankings and refreshes underperforming pages</div>
+            <div class="agent-task">Structures FAQ content for AI and voice search</div>
+            <div class="agent-task">Flags technical SEO issues for review</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-head">
+            <h4>Referral Intelligence Agent</h4>
+            <div class="agent-serves">Commercial Litigation</div>
+          </div>
+          <div class="agent-tasks">
+            <div class="agent-task">Maintains referral source CRM with relationship scores</div>
+            <div class="agent-task">Drafts personalized check-in messages for dormant contacts</div>
+            <div class="agent-task">Produces monthly intelligence brief for business contacts</div>
+            <div class="agent-task">Alerts when a key contact changes roles or firms</div>
+            <div class="agent-task">Tracks referral attribution per case</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-head">
+            <h4>Thought Leadership Agent</h4>
+            <div class="agent-serves">Class Action</div>
+          </div>
+          <div class="agent-tasks">
+            <div class="agent-task">Monitors case law for novel certification issues</div>
+            <div class="agent-task">Drafts article outlines and LinkedIn posts for attorney review</div>
+            <div class="agent-task">Identifies relevant podcasts and panel opportunities</div>
+            <div class="agent-task">Tracks competing firms' publications and positioning</div>
+            <div class="agent-task">Manages submission pipeline to bar journals</div>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-head">
+            <h4>Intake &amp; Conversion Agent</h4>
+            <div class="agent-serves">All Practice Areas</div>
+          </div>
+          <div class="agent-tasks">
+            <div class="agent-task">Answers inbound calls 24/7 and conducts structured intake</div>
+            <div class="agent-task">Qualifies prospects against the firm's practice areas</div>
+            <div class="agent-task">Sets appointments and follows up on unresponsive contacts</div>
+            <div class="agent-task">Pushes qualified lead records directly into Clio</div>
+            <div class="agent-task">Routes time-sensitive matters for immediate attorney attention</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- JOINT ACCOUNTABILITIES -->
+    <div class="sec">
+      <div class="sec-label">Joint Accountabilities</div>
+      <h2>How We Work Together</h2>
+      <div class="party">
+        <div class="party-label">We will</div>
+        <div class="bullet-list">
+          <div class="bullet-item">Be available for a 45-minute meeting at least once a week.</div>
+          <div class="bullet-item">Provide key information necessary for deliverables to be completed.</div>
+        </div>
+      </div>
+      <div class="party" style="margin-top:24px;">
+        <div class="party-label">We both will</div>
+        <div class="bullet-list">
+          <div class="bullet-item">Immediately inform the other of developments we find that might materially affect the success of this project — whether directly related to the project or not.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTMENT -->
+    <div class="sec">
+      <div class="sec-label">Terms and Conditions</div>
+      <h2>Investment</h2>
+      <div class="invest">
+        <div class="inv-row">
+          <div class="inv-label">
+            Setup &amp; Installation
+            <small>Growth OS architecture, all four sub-agent builds, Clio integration, brand voice training, and team onboarding</small>
+          </div>
+          <div class="inv-price">$10,000*</div>
+        </div>
+        <div class="inv-row">
+          <div class="inv-label">
+            Monthly Maintenance &amp; Enhancement Retainer
+            <small>Ongoing tuning across all agents, weekly output review, model upgrades, performance reporting, and priority support</small>
+          </div>
+          <div class="inv-price">$2,500* / mo</div>
+        </div>
+      </div>
+
+      <div class="terms">
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Setup fee</strong> is due at the start of the project.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Monthly maintenance fee</strong> is due after 30 days and every 30 days thereafter.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Client will kindly give Vestibule <strong>14 days notice</strong> (preferably 30 days) before terminating the maintenance contract.</span>
+        </div>
+      </div>
+
+      <p class="asterisk-note">* Fees do not include third-party platform or licensing costs (e.g., Claude API, voice API, Clio integration). These are billed at cost and disclosed in advance.</p>
+    </div>
+
+    <!-- ACCEPTANCE -->
+    <div class="sec">
+      <div class="sec-label">Acceptance</div>
+      <h2>Acceptance</h2>
+      <p>By signing below, both parties agree to the scope and terms outlined in this consulting services agreement.</p>
+      <div class="sig-grid">
+        <div class="sig-box">
+          <h4>Barton Cerjak Law</h4>
+          <div class="sig-line"></div>
+          <div class="sig-name">Authorized Signature</div>
+          <div class="sig-date">
+            <div class="sig-line"></div>
+            <div class="sig-name">Date</div>
+          </div>
+        </div>
+        <div class="sig-box">
+          <h4>Vestibule Consulting</h4>
+          <div class="sig-line"></div>
+          <div class="sig-name">Bart Morse</div>
+          <div class="sig-date">
+            <div class="sig-line"></div>
+            <div class="sig-name">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="doc-foot">
+    <p>Confidential &nbsp;·&nbsp; Barton Cerjak Law &nbsp;·&nbsp; Milwaukee, Wisconsin &nbsp;·&nbsp; April 2026</p>
+    <p>Prepared by Vestibule Consulting</p>
+  </div>
+
+</div>
+</body>
+</html>
