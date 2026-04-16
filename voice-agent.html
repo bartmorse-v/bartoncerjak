@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake Voice Agent — Barton Cerjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #FE2920;
+  --dark:   #111111;
+  --near:   #242426;
+  --white:  #ffffff;
+  --paper:  #F5F5F5;
+  --body:   #333333;
+  --muted:  #777777;
+  --line:   #e0e0e0;
+  --max:    900px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body {
+  background: #dcdcda;
+  font-family: 'Barlow', sans-serif;
+  color: var(--body);
+  line-height: 1.6;
+}
+
+.doc {
+  max-width: var(--max);
+  margin: 48px auto;
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+}
+
+/* ── COVER ─────────────────────────────────── */
+.cover {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cover-bg {
+  position: absolute; inset: 0;
+  background: var(--dark);
+}
+.cover-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+}
+.cover-content {
+  position: relative; z-index: 2;
+  padding: 40px 52px;
+}
+.cover-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 12px;
+}
+.cover h1 {
+  font-size: 38px; font-weight: 900;
+  color: var(--white); line-height: 1.1;
+  margin-bottom: 18px;
+}
+.cover h1 span { color: var(--red); }
+.cover-meta {
+  display: flex; gap: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 16px;
+}
+.cm-label { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.cm-value { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+/* ── BODY ──────────────────────────────────── */
+.body { padding: 0 52px; }
+
+.sec {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sec:last-child { border-bottom: none; }
+
+.sec-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.sec h2 {
+  font-size: 22px; font-weight: 700;
+  color: var(--dark); margin-bottom: 14px;
+  line-height: 1.2;
+}
+.sec p {
+  font-size: 14px; color: var(--body);
+  line-height: 1.75; margin-bottom: 14px;
+}
+.sec p:last-child { margin-bottom: 0; }
+
+/* ── OFFERING CARD ─────────────────────────── */
+.offering {
+  background: var(--paper);
+  border-left: 4px solid var(--red);
+  padding: 24px 26px;
+  margin-top: 4px;
+}
+.offering h3 {
+  font-size: 16px; font-weight: 700;
+  color: var(--dark); margin-bottom: 16px;
+}
+.offering-rows { display: flex; flex-direction: column; gap: 12px; }
+.offering-row { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; }
+.offering-key {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); padding-top: 2px;
+}
+.offering-val { font-size: 13.5px; color: var(--body); line-height: 1.6; }
+
+/* ── HOW IT WORKS ──────────────────────────── */
+.steps {
+  display: flex; flex-direction: column;
+  gap: 0; margin-top: 4px;
+  counter-reset: steps;
+}
+.step {
+  display: flex; gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: flex-start;
+  counter-increment: steps;
+}
+.step:last-child { border-bottom: none; }
+.step::before {
+  content: counter(steps);
+  font-size: 20px; font-weight: 900;
+  color: var(--red); min-width: 24px;
+  line-height: 1; flex-shrink: 0;
+  padding-top: 1px;
+}
+.step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.step p  { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+/* ── JOINT ACCOUNTABILITIES ────────────────── */
+.party { margin-top: 20px; }
+.party:first-child { margin-top: 4px; }
+.party-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px;
+}
+.bullet-list { display: flex; flex-direction: column; gap: 9px; }
+.bullet-item {
+  display: flex; gap: 12px;
+  font-size: 13.5px; color: var(--body);
+  line-height: 1.55;
+}
+.bullet-item::before {
+  content: "•";
+  color: var(--red);
+  font-weight: 900;
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+/* ── INVESTMENT ────────────────────────────── */
+.invest {
+  border: 1px solid var(--line);
+  margin-top: 4px;
+}
+.inv-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.inv-row:last-child { border-bottom: none; background: var(--dark); }
+.inv-label { font-size: 14px; font-weight: 600; color: var(--dark); }
+.inv-label small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.inv-row:last-child .inv-label { color: var(--white); }
+.inv-row:last-child .inv-label small { color: rgba(255,255,255,0.4); }
+.inv-price {
+  font-size: 22px; font-weight: 700;
+  color: var(--dark); white-space: nowrap;
+  text-align: right;
+}
+.inv-row:last-child .inv-price { color: var(--red); }
+
+/* ── TERMS LIST ────────────────────────────── */
+.terms { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.term {
+  display: flex; gap: 12px;
+  font-size: 13.5px; color: var(--body);
+  line-height: 1.55;
+}
+.term svg { stroke: var(--red); flex-shrink: 0; margin-top: 3px; }
+
+.asterisk-note {
+  font-size: 12px; color: var(--muted);
+  margin-top: 14px; line-height: 1.55;
+}
+
+/* ── SIGNATURE ─────────────────────────────── */
+.sig-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 20px;
+}
+.sig-box { border: 1px solid var(--line); padding: 22px; }
+.sig-box h4 {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 36px;
+}
+.sig-line { border-top: 1px solid var(--dark); margin-bottom: 5px; }
+.sig-name { font-size: 12px; color: var(--muted); }
+.sig-date { margin-top: 20px; }
+
+/* ── FOOTER ────────────────────────────────── */
+.doc-foot {
+  padding: 16px 52px;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+}
+.doc-foot p { font-size: 11px; color: var(--muted); }
+
+@media print {
+  body { background: white; }
+  .doc { box-shadow: none; margin: 0; max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-bg"></div>
+    <div class="cover-overlay"></div>
+    <div class="cover-content">
+      <div class="cover-label">Consulting Services Agreement &nbsp;·&nbsp; Prepared for Barton Cerjak</div>
+      <h1>Intake Voice <span>Agent</span></h1>
+      <div class="cover-meta">
+        <div><div class="cm-label">Prepared for</div><div class="cm-value">Barton Cerjak Law</div></div>
+        <div><div class="cm-label">Prepared by</div><div class="cm-value">Bart Morse</div></div>
+        <div><div class="cm-label">Date</div><div class="cm-value">April 2026</div></div>
+        <div><div class="cm-label">Status</div><div class="cm-value">Confidential</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- SUMMARY -->
+    <div class="sec">
+      <div class="sec-label">Summary</div>
+      <h2>Never Miss a Lead Again</h2>
+      <p>For a litigation firm like Barton Cerjak, every inbound call is a potential client — and every missed call or slow response is an opportunity handed to a competitor. The reality of running a lean practice is that attorneys and staff can't always pick up the phone, and after-hours inquiries often go unanswered until it's too late.</p>
+      <p>This engagement deploys an AI-powered intake voice agent that works both directions. On the inbound side, it answers calls around the clock, guides prospects through a structured intake conversation, and qualifies them against the firm's practice areas. On the outbound side, it follows up with leads who submitted a form, left a voicemail, or went cold — keeping the firm top of mind without tying up staff time. Every qualified interaction automatically creates a record in Clio, ready for the team to act on. The pipeline runs even when the office doesn't.</p>
+    </div>
+
+    <!-- OFFERINGS -->
+    <div class="sec">
+      <div class="sec-label">Offerings</div>
+      <h2>What We're Delivering</h2>
+      <div class="offering">
+        <h3>1 &nbsp;—&nbsp; Intake Voice Agent + Clio Integration</h3>
+        <div class="offering-rows">
+          <div class="offering-row">
+            <div class="offering-key">Value</div>
+            <div class="offering-val">24/7 inbound call coverage and proactive outbound follow-up — qualifying prospects, capturing key case details, and feeding every interaction into Clio so the team wakes up to an organized pipeline, not a voicemail box.</div>
+          </div>
+          <div class="offering-row">
+            <div class="offering-key">Deliverable</div>
+            <div class="offering-val">A fully configured voice AI agent trained on the firm's intake script and practice areas — handling both inbound calls and outbound lead follow-up, integrated with Clio to auto-create contact and matter records for every qualified lead.</div>
+          </div>
+          <div class="offering-row">
+            <div class="offering-key">Timeline</div>
+            <div class="offering-val">Initial deployment in 2–3 weeks. The agent will be live and taking calls quickly, with ongoing tuning of intake scripts and qualification logic in the weeks that follow based on real call data.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="sec">
+      <div class="sec-label">How It Works</div>
+      <h2>The Lead Flow</h2>
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h4>A prospect calls the firm</h4>
+            <p>The voice agent answers instantly — any time of day, any day of the week. The caller hears a professional, on-brand greeting and is guided into the intake process.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>The agent conducts intake</h4>
+            <p>The agent asks structured questions about the nature of the matter, timeline, and relevant details — mirroring what a skilled intake coordinator would cover, without putting a human on call 24/7.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>The lead is qualified and routed</h4>
+            <p>Based on the conversation, the agent determines fit against the firm's practice areas. Qualified leads are flagged for follow-up; unqualified calls are handled gracefully with a referral or message.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>The agent follows up outbound</h4>
+            <p>For leads who submitted a form, left a voicemail, or went cold, the agent places a follow-up call — re-engaging the prospect and continuing the intake process without any staff involvement.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h4>A Clio record is created automatically</h4>
+            <p>Contact details and intake notes are pushed directly into Clio — no manual data entry. The team reviews a complete, organized lead record and can follow up immediately.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOINT ACCOUNTABILITIES -->
+    <div class="sec">
+      <div class="sec-label">Joint Accountabilities</div>
+      <h2>How We Work Together</h2>
+
+      <div class="party">
+        <div class="party-label">We will</div>
+        <div class="bullet-list">
+          <div class="bullet-item">Be available for a 45-minute meeting at least once a week.</div>
+          <div class="bullet-item">Provide key information necessary for deliverables to be completed.</div>
+        </div>
+      </div>
+
+      <div class="party" style="margin-top:24px;">
+        <div class="party-label">We both will</div>
+        <div class="bullet-list">
+          <div class="bullet-item">Immediately inform the other of developments we find that might materially affect the success of this project — whether directly related to the project or not.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMS AND CONDITIONS -->
+    <div class="sec">
+      <div class="sec-label">Terms and Conditions</div>
+      <h2>Investment</h2>
+      <div class="invest">
+        <div class="inv-row">
+          <div class="inv-label">
+            Setup &amp; Integration
+            <small>Voice agent configuration, intake script development, Clio integration, and team onboarding</small>
+          </div>
+          <div class="inv-price">$5,000*</div>
+        </div>
+        <div class="inv-row">
+          <div class="inv-label">
+            Monthly Maintenance &amp; Enhancement Retainer
+            <small>Ongoing script tuning, call review, model updates, Clio sync monitoring, and priority support</small>
+          </div>
+          <div class="inv-price">$500* / mo</div>
+        </div>
+      </div>
+
+      <div class="terms">
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Setup fee</strong> is due at the start of the project.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Monthly maintenance fee</strong> is due after 30 days and every 30 days thereafter.</span>
+        </div>
+        <div class="term">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Client will kindly give Vestibule <strong>14 days notice</strong> (preferably 30 days) before terminating the maintenance contract.</span>
+        </div>
+      </div>
+
+      <p class="asterisk-note">* Fees do not include third-party platform or licensing costs (e.g., voice API, Clio API access). These are billed at cost and disclosed in advance.</p>
+    </div>
+
+    <!-- ACCEPTANCE -->
+    <div class="sec">
+      <div class="sec-label">Acceptance</div>
+      <h2>Acceptance</h2>
+      <p>By signing below, both parties agree to the scope and terms outlined in this consulting services agreement.</p>
+      <div class="sig-grid">
+        <div class="sig-box">
+          <h4>Barton Cerjak Law</h4>
+          <div class="sig-line"></div>
+          <div class="sig-name">Authorized Signature</div>
+          <div class="sig-date">
+            <div class="sig-line"></div>
+            <div class="sig-name">Date</div>
+          </div>
+        </div>
+        <div class="sig-box">
+          <h4>Vestibule Consulting</h4>
+          <div class="sig-line"></div>
+          <div class="sig-name">Bart Morse</div>
+          <div class="sig-date">
+            <div class="sig-line"></div>
+            <div class="sig-name">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="doc-foot">
+    <p>Confidential &nbsp;·&nbsp; Barton Cerjak Law &nbsp;·&nbsp; Milwaukee, Wisconsin &nbsp;·&nbsp; April 2026</p>
+    <p>Prepared by Vestibule Consulting</p>
+  </div>
+
+</div>
+</body>
+</html>
