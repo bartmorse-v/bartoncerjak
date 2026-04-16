@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Agent Suite — Barton Cerjak Law</title>
+<title>Consulting Services Agreement — Barton Cerjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
   --body:   #333333;
   --muted:  #777777;
   --line:   #e0e0e0;
-  --max:    720px;
+  --max:    900px;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -108,47 +108,48 @@ body {
 }
 .sec p:last-child { margin-bottom: 0; }
 
-/* ── AGENTS GRID ───────────────────────────── */
-.agents {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* ── OFFERING CARD ─────────────────────────── */
+.offering {
+  background: var(--paper);
+  border-left: 4px solid var(--red);
+  padding: 24px 26px;
   margin-top: 4px;
 }
-.agent {
-  background: var(--paper);
-  border-left: 3px solid var(--red);
-  padding: 18px 20px;
+.offering h3 {
+  font-size: 16px; font-weight: 700;
+  color: var(--dark); margin-bottom: 16px;
 }
-.agent h4 {
-  font-size: 13px; font-weight: 700;
-  color: var(--dark); margin-bottom: 5px;
+.offering-rows { display: flex; flex-direction: column; gap: 12px; }
+.offering-row { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; }
+.offering-key {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); padding-top: 2px;
 }
-.agent p { font-size: 12.5px; color: var(--muted); line-height: 1.55; margin: 0; }
+.offering-val { font-size: 13.5px; color: var(--body); line-height: 1.6; }
 
-/* ── HOW IT WORKS ──────────────────────────── */
-.steps {
-  display: flex; flex-direction: column;
-  gap: 0; margin-top: 4px;
-  counter-reset: steps;
+/* ── JOINT ACCOUNTABILITIES ────────────────── */
+.party { margin-top: 20px; }
+.party:first-child { margin-top: 4px; }
+.party-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px;
 }
-.step {
-  display: flex; gap: 18px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-  align-items: flex-start;
-  counter-increment: steps;
+.bullet-list { display: flex; flex-direction: column; gap: 9px; }
+.bullet-item {
+  display: flex; gap: 12px;
+  font-size: 13.5px; color: var(--body);
+  line-height: 1.55;
 }
-.step:last-child { border-bottom: none; }
-.step::before {
-  content: counter(steps);
-  font-size: 20px; font-weight: 900;
-  color: var(--red); min-width: 24px;
-  line-height: 1; flex-shrink: 0;
-  padding-top: 1px;
+.bullet-item::before {
+  content: "•";
+  color: var(--red);
+  font-weight: 900;
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1.3;
 }
-.step h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
-.step p  { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
 
 /* ── INVESTMENT ────────────────────────────── */
 .invest {
@@ -175,26 +176,20 @@ body {
 }
 .inv-row:last-child .inv-price { color: var(--red); }
 
-/* ── NOTE BOX ──────────────────────────────── */
-.note {
-  background: var(--near);
-  border-left: 4px solid var(--red);
-  padding: 18px 22px;
-  margin-top: 20px;
-  display: flex; gap: 14px; align-items: flex-start;
-}
-.note svg { stroke: var(--red); flex-shrink: 0; margin-top: 2px; }
-.note p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; }
-.note strong { color: #ff7070; }
-
 /* ── TERMS LIST ────────────────────────────── */
-.terms { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.terms { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
 .term {
   display: flex; gap: 12px;
   font-size: 13.5px; color: var(--body);
   line-height: 1.55;
 }
 .term svg { stroke: var(--red); flex-shrink: 0; margin-top: 3px; }
+
+/* ── ASTERISK NOTE ─────────────────────────── */
+.asterisk-note {
+  font-size: 12px; color: var(--muted);
+  margin-top: 14px; line-height: 1.55;
+}
 
 /* ── SIGNATURE ─────────────────────────────── */
 .sig-grid {
@@ -234,8 +229,8 @@ body {
     <div class="cover-bg" role="img" aria-label="Milwaukee law office at night"></div>
     <div class="cover-overlay"></div>
     <div class="cover-content">
-      <div class="cover-label">Statement of Work</div>
-      <h1>AI Agent Suite<br><span>for Barton Cerjak Law</span></h1>
+      <div class="cover-label">Consulting Services Agreement</div>
+      <h1>Prepared for<br><span>Barton Cerjak</span></h1>
       <div class="cover-meta">
         <div><div class="cm-label">Prepared for</div><div class="cm-value">Barton Cerjak Law</div></div>
         <div><div class="cm-label">Prepared by</div><div class="cm-value">Bart Morse</div></div>
@@ -247,139 +242,106 @@ body {
 
   <div class="body">
 
-    <!-- 1. WHAT WE'RE BUILDING -->
+    <!-- SUMMARY -->
     <div class="sec">
-      <div class="sec-label">Section 1</div>
-      <h2>What We're Building</h2>
-      <p>We will design, configure, and install a suite of AI agents built on Claude — purpose-built for Barton Cerjak Law's practice areas, brand voice, and Milwaukee market. These are not off-the-shelf tools. Each agent is trained on the firm's specific context and built to be used directly by your team, on demand, without outside assistance.</p>
-      <p>Once installed, the agents belong to you. Your staff uses them. We maintain and improve them.</p>
+      <div class="sec-label">Summary</div>
+      <h2>AI as a Business Advantage for Barton Cerjak</h2>
+      <p>Barton Cerjak Law is a lean, high-performing litigation firm competing in a demanding Milwaukee market. Like many boutique practices, the firm carries real operational weight — managing an active caseload, staying visible to clients and referral partners, and running a business — often with the same people doing all three. The opportunity is to put AI to work as a force multiplier: doing the heavy lifting on insight, research, and routine output so the team can stay focused on what only attorneys can do.</p>
+      <p>This engagement is built around that vision. Rather than adding headcount or layering in disconnected tools, Barton Cerjak is investing in a purpose-built AI system that learns the firm's context — its clients, its matters, its voice — and surfaces what to do next. The result is a practice that can grow its capability and its business without growing its overhead. Smart, sustainable, and built to compound over time.</p>
     </div>
 
-    <!-- 2. THE AGENT SUITE -->
+    <!-- OFFERINGS -->
     <div class="sec">
-      <div class="sec-label">Section 2</div>
-      <h2>The Agent Suite</h2>
-      <p>The initial installation includes the following agents. Each is a standalone tool your team can run in minutes to produce ready-to-use output.</p>
-      <div class="agents">
-        <div class="agent">
-          <h4>Social Content Agent</h4>
-          <p>Drafts LinkedIn, Instagram, and Facebook posts in the firm's voice. Input a topic or case result — get a ready-to-post caption.</p>
-        </div>
-        <div class="agent">
-          <h4>Blog &amp; SEO Agent</h4>
-          <p>Produces long-form blog posts targeting Milwaukee search keywords. Input a topic — get a structured, SEO-ready draft.</p>
-        </div>
-        <div class="agent">
-          <h4>News Intelligence Agent</h4>
-          <p>Monitors Milwaukee-area news, Wisconsin court records, and legal industry updates. Surfaces relevant opportunities and drafts a response.</p>
-        </div>
-        <div class="agent">
-          <h4>Email &amp; Newsletter Agent</h4>
-          <p>Drafts client newsletters, referral partner updates, and intake follow-up emails. Consistent tone, ready to send.</p>
-        </div>
-        <div class="agent">
-          <h4>Case Manager Agent</h4>
-          <p>Assists with case intake summaries, status updates, deadline tracking notes, and internal case memos — keeping the team aligned without manual write-ups.</p>
-        </div>
-        <div class="agent">
-          <h4>Upgraded Brand Manager Agent <span style="font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--red); margin-left:6px;">Enhanced</span></h4>
-          <p>Already installed. This update expands the existing AI task manager with enhanced capabilities, such as recommendations and the ability to execute tasks.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. HOW IT WORKS -->
-    <div class="sec">
-      <div class="sec-label">Section 3</div>
-      <h2>How Your Team Uses It</h2>
-      <p>No technical knowledge required. Each agent works like a conversation — your staff types a prompt, the agent produces output, they review and use it. The entire process for most tasks takes under five minutes.</p>
-      <div class="steps">
-        <div class="step">
-          <div>
-            <h4>Open the agent workspace</h4>
-            <p>Your team accesses the installed agents through a simple browser-based interface. No software to install, no logins to manage.</p>
+      <div class="sec-label">Offerings</div>
+      <h2>What We're Delivering</h2>
+      <div class="offering">
+        <h3>1 &nbsp;—&nbsp; Enhanced AI Task Manager</h3>
+        <div class="offering-rows">
+          <div class="offering-row">
+            <div class="offering-key">Value</div>
+            <div class="offering-val">Deep AI insights into what to do next — with the ability to query across clients and matters to surface priorities, patterns, and opportunities the team would otherwise miss.</div>
           </div>
-        </div>
-        <div class="step">
-          <div>
-            <h4>Describe what you need</h4>
-            <p>Type a plain-English prompt: "Write a LinkedIn post about our recent verdict in a slip-and-fall case." The agent handles the rest.</p>
+          <div class="offering-row">
+            <div class="offering-key">Deliverable</div>
+            <div class="offering-val">A new, enhanced front-end interface backed by a deeper AI engine — purpose-built for the firm's workflow and data, replacing the existing system with something meaningfully more powerful.</div>
           </div>
-        </div>
-        <div class="step">
-          <div>
-            <h4>Review and use the output</h4>
-            <p>The agent delivers a finished draft. Your team edits if needed and publishes, sends, or files it. No back-and-forth with an outside vendor.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div>
-            <h4>We keep it current</h4>
-            <p>As Claude improves and your firm's needs evolve, we update the agents monthly — new capabilities, refined prompts, new agent builds on request.</p>
+          <div class="offering-row">
+            <div class="offering-key">Timeline</div>
+            <div class="offering-val">Transition from the old system to the new can happen in days. Expect several weeks of active data flow before the AI is fully tuned to the firm's patterns and delivering peak insight.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 4. INVESTMENT -->
+    <!-- JOINT ACCOUNTABILITIES -->
     <div class="sec">
-      <div class="sec-label">Section 4</div>
+      <div class="sec-label">Joint Accountabilities</div>
+      <h2>How We Work Together</h2>
+
+      <div class="party">
+        <div class="party-label">We will</div>
+        <div class="bullet-list">
+          <div class="bullet-item">Be available for a 45-minute meeting at least once a week.</div>
+          <div class="bullet-item">Provide key information necessary for deliverables to be completed.</div>
+        </div>
+      </div>
+
+      <div class="party" style="margin-top:24px;">
+        <div class="party-label">We both will</div>
+        <div class="bullet-list">
+          <div class="bullet-item">Immediately inform the other of developments we find that might materially affect the success of this project — whether directly related to the project or not.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMS AND CONDITIONS -->
+    <div class="sec">
+      <div class="sec-label">Terms and Conditions</div>
       <h2>Investment</h2>
       <div class="invest">
         <div class="inv-row">
           <div class="inv-label">
             Setup &amp; Installation
-            <small>Agent design, configuration, brand voice training, and a 90-minute onboarding session for your team</small>
+            <small>System design, AI configuration, data integration, and team onboarding</small>
           </div>
-          <div class="inv-price">$4,500</div>
+          <div class="inv-price">$4,500*</div>
         </div>
         <div class="inv-row">
           <div class="inv-label">
-            Monthly Retainer
-            <small>Ongoing maintenance, model upgrades, agent refinements, and priority support — all agents included</small>
+            Monthly Maintenance &amp; Enhancement Retainer
+            <small>Ongoing tuning, model upgrades, feature improvements, and priority support</small>
           </div>
-          <div class="inv-price">$2,500 / mo</div>
+          <div class="inv-price">$1,500* / mo</div>
         </div>
       </div>
-      <div class="note">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <p>The retainer does not cover content production. <strong>Your team creates the content — the agents make it fast.</strong> This is a software investment, not an agency relationship.</p>
-      </div>
-    </div>
 
-    <!-- 5. TERMS -->
-    <div class="sec">
-      <div class="sec-label">Section 5</div>
-      <h2>Terms</h2>
       <div class="terms">
         <div class="term">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Setup fee</strong> is due upon signing. Work begins within 5 business days.</span>
+          <span>A <strong>50% deposit</strong> is due upon acceptance of this proposal.</span>
         </div>
         <div class="term">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Contract term:</strong> 3-month initial commitment, then month-to-month with 30 days written notice to cancel.</span>
+          <span><strong>Setup fee</strong> balance is due upon project kickoff.</span>
         </div>
         <div class="term">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Billing:</strong> Monthly retainer invoiced on the 1st of each month, net 15.</span>
+          <span><strong>Monthly maintenance fee</strong> is due after 30 days and every 30 days thereafter.</span>
         </div>
         <div class="term">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Claude licensing:</strong> The firm will require a Claude Team or Claude for Work account (billed separately by Anthropic). We will advise on the right plan during onboarding.</span>
-        </div>
-        <div class="term">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Confidentiality:</strong> All firm data, case information, and strategic materials shared during setup are held in strict confidence.</span>
+          <span>Client will kindly give Vestibule <strong>14 days notice</strong> (preferably 30 days) before terminating the maintenance contract.</span>
         </div>
       </div>
+
+      <p class="asterisk-note">* Fees do not include third-party platform or licensing costs (e.g., Claude API, hosting). These are billed at cost and disclosed in advance.</p>
     </div>
 
-    <!-- 6. ACCEPTANCE -->
+    <!-- ACCEPTANCE -->
     <div class="sec">
-      <div class="sec-label">Section 6</div>
+      <div class="sec-label">Acceptance</div>
       <h2>Acceptance</h2>
-      <p>By signing below, both parties agree to the scope and terms outlined in this statement of work.</p>
+      <p>By signing below, both parties agree to the scope and terms outlined in this consulting services agreement.</p>
       <div class="sig-grid">
         <div class="sig-box">
           <h4>Barton Cerjak Law</h4>
@@ -391,7 +353,7 @@ body {
           </div>
         </div>
         <div class="sig-box">
-          <h4>Service Provider</h4>
+          <h4>Vestibule Consulting</h4>
           <div class="sig-line"></div>
           <div class="sig-name">Bart Morse</div>
           <div class="sig-date">
@@ -406,7 +368,7 @@ body {
 
   <div class="doc-foot">
     <p>Confidential &nbsp;·&nbsp; Barton Cerjak Law &nbsp;·&nbsp; Milwaukee, Wisconsin &nbsp;·&nbsp; April 2026</p>
-    <p>Prepared by Bart Morse</p>
+    <p>Prepared by Vestibule Consulting</p>
   </div>
 
 </div>
